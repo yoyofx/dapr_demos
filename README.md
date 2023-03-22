@@ -1,3 +1,11 @@
+# Install Dapr (for mac)
+CLI version: 1.9.1
+
+Runtime version: 1.10.0
+```bash
+brew install dapr/tap/dapr-cli
+```
+
 # Run myapp http server
 ```bash
 cd ./server
