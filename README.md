@@ -24,3 +24,20 @@ if you installed dapr-cli version v1.11.0 , you should execute the following com
 ```bash
 dapr run -f .
 ```
+
+# Run all in kubernetes
+Build server and client Docker images, and then push them afterwards.
+```bash
+cd server
+docker build docker build  -t {your_repository}/server:v0.1 . --platform=linux/amd64
+
+cd client
+docker build docker build  -t {your_repository}/client:v0.1 . --platform=linux/amd64
+```
+```bash
+cd deploy
+
+kubectl apply -f server.yaml
+
+kubectl apply -f client.yaml
+```

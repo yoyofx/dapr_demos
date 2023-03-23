@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-client
+  labels:
+    app: myapp-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: myapp-client
+  template:
+    metadata:
+      labels:
+        k8s-app: myapp-client
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "myapp-client"
+        dapr.io/enable-api-logging: "true"
+    spec:
+      containers:
+        - name: app
+          image: kubelilin/dapr_demos:client_v0.1

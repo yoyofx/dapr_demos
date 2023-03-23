@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"errors"
+	"fmt"
 	"github.com/dapr/go-sdk/service/common"
 	daprd "github.com/dapr/go-sdk/service/http"
 	"log"
@@ -10,6 +11,7 @@ import (
 )
 
 func main() {
+	fmt.Println("hello dapr service invocation server")
 	service := daprd.NewService(":8223")
 	// add a service to service invocation handler
 	if err := service.AddServiceInvocationHandler("/echo", echoHandler); err != nil {

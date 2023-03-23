@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-server
+  labels:
+    app: myapp-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: myapp-server
+  template:
+    metadata:
+      labels:
+        k8s-app: myapp-server
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "myapp"
+        dapr.io/app-port: "8223"
+        dapr.io/enable-api-logging: "true"
+    spec:
+      containers:
+        - name: app
+          image: kubelilin/dapr_demos:server_v0.2
