@@ -26,13 +26,13 @@ dapr run -f .
 ```
 
 # Deploying your code in kubernetes
-1. Update Golang code as you see fit!
-2. Navigate to the directory of the app you want to build a new image for.
-3. Run docker build -t <YOUR_IMAGE_NAME> . . You can name your image whatever you like. If you're planning on hosting it on docker hub, then it should start with <YOUR_DOCKERHUB_USERNAME>/.
-4. Once your image has built you can see it on your machines by running docker images.
-5. To publish your docker image to docker hub (or another registry), first login: docker login. Then rundocker push <YOUR IMAGE NAME>.
-6. Update your .yaml file to reflect the new image name.
-7. Deploy your updated Dapr enabled app: kubectl apply -f <YOUR APP NAME>.yaml.
+* Update Golang code as you see fit!
+* Navigate to the directory of the app you want to build a new image for.
+* Run docker build -t <YOUR_IMAGE_NAME> . . You can name your image whatever you like. If you're planning on hosting it on docker hub, then it should start with <YOUR_DOCKERHUB_USERNAME>/.
+* Once your image has built you can see it on your machines by running docker images.
+* To publish your docker image to docker hub (or another registry), first login: docker login. Then rundocker push <YOUR IMAGE NAME>.
+* Update your .yaml file to reflect the new image name.
+* Deploy your updated Dapr enabled app: kubectl apply -f <YOUR APP NAME>.yaml.
 
 Build server and client Docker images, and then push them afterwards.
 
