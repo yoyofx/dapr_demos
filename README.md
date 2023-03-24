@@ -50,4 +50,15 @@ cd deploy
 kubectl apply -f server.yaml
 
 kubectl apply -f client.yaml
+
+---
+// state server
+---
+kubectl apply -f ./componsents/redis_state.yaml
+kubectl apply -f stateserver.yaml
+```
+
+kubectl forward {stateserver service} 3000
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{"value":"hello,world!"}' http://localhost:58522/state/value
 ```
