@@ -61,7 +61,7 @@ func main() {
 		c.JSON(http.StatusOK, gin.H{"message": "State saved successfully"})
 	})
 
-	r.POST("/demo-cron", func(c *gin.Context) {
+	r.Any("/demo-cron", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"message": "State saved successfully"})
 	})
 
