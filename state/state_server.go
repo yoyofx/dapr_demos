@@ -2,12 +2,15 @@ package main
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 	"time"
 
+	dapr "github.com/dapr/go-sdk/client"
 	"github.com/gin-gonic/gin"
 )
 
@@ -22,6 +25,15 @@ type stateRequest struct {
 }
 
 func main() {
+	log := log.Default()
+	// 创建 Dapr 客户端
+	client, err := dapr.NewClient()
+	if err != nil {
+		fmt.Println("无法创建 Dapr 客户端:", err)
+		os.Exit(1)
+	}
+	defer client.Close()
+	// gin http server
 	r := gin.Default()
 
 	r.POST("/state/value", func(c *gin.Context) {
@@ -62,6 +74,19 @@ func main() {
 	})
 
 	r.Any("/demo-cron", func(c *gin.Context) {
+		log.Printf("service method invoked app-id:%s,methodName:", "myapp", "echo")
+		timeString := time.Now().Format("2006-01-02 15:04:05")
+		resp, err := client.InvokeMethodWithContent(context.Background(),
+			"myapp", "echo", "post",
+			&dapr.DataContent{Data: []byte("hello " + timeString), ContentType: "text/plain"})
+		if err != nil {
+			fmt.Println("无法调用 Dapr ServiceInvocation API:", err)
+		}
+		// 解析响应
+		log.Printf("service method invoked response:%s", string(resp))
+
+		_ = client.SaveState(context.Background(), "redis", "myway", resp, nil)
+
 		c.JSON(http.StatusOK, gin.H{"message": "State saved successfully"})
 	})
 
