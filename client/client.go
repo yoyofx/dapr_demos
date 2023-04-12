@@ -21,6 +21,7 @@ func main() {
 	// 准备 ServiceInvocation 请求
 	for {
 		// 调用 ServiceInvocation API
+		// 在K8s中，调用 appID参数为 被调用服务定义的  dapr.io/app-id 标签 ，具体请查看部署yaml或PaaS中的部署定义。
 		resp, err := client.InvokeMethodWithContent(context.Background(),
 			"myapp", "echo", "post",
 			&dapr.DataContent{Data: []byte("hello"), ContentType: "text/plain"})

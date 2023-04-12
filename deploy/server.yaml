@@ -15,7 +15,7 @@ spec:
         k8s-app: myapp-server
       annotations:
         dapr.io/enabled: "true"
-        dapr.io/app-id: "myapp"
+        dapr.io/app-id: "daprclient-daprdemos-kind-kind" # app-id, 使用PasS部署的话 取部署名称
         dapr.io/app-port: "8223"
         dapr.io/enable-api-logging: "true"
     spec:

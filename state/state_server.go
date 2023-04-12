@@ -73,9 +73,12 @@ func main() {
 		c.JSON(http.StatusOK, gin.H{"message": "State saved successfully"})
 	})
 
+	// 绑定 cron ( input binding )
 	r.Any("/demo-cron", func(c *gin.Context) {
 		log.Printf("service method invoked app-id:%s,methodName:", "myapp", "echo")
 		timeString := time.Now().Format("2006-01-02 15:04:05")
+
+		// 在K8s中，调用 appID参数为 被调用服务定义的  dapr.io/app-id 标签 ，具体请查看部署yaml或PaaS中的部署定义。
 		resp, err := client.InvokeMethodWithContent(context.Background(),
 			"daprclient-daprdemos-kind-kind", "echo", "post",
 			&dapr.DataContent{Data: []byte("hello " + timeString), ContentType: "text/plain"})
