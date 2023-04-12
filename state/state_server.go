@@ -77,7 +77,7 @@ func main() {
 		log.Printf("service method invoked app-id:%s,methodName:", "myapp", "echo")
 		timeString := time.Now().Format("2006-01-02 15:04:05")
 		resp, err := client.InvokeMethodWithContent(context.Background(),
-			"myapp", "echo", "post",
+			"daprclient-daprdemos-kind-kind", "echo", "post",
 			&dapr.DataContent{Data: []byte("hello " + timeString), ContentType: "text/plain"})
 		if err != nil {
 			fmt.Println("无法调用 Dapr ServiceInvocation API:", err)
