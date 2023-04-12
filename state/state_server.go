@@ -61,6 +61,10 @@ func main() {
 		c.JSON(http.StatusOK, gin.H{"message": "State saved successfully"})
 	})
 
+	r.POST("/demo-cron", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{"message": "State saved successfully"})
+	})
+
 	if err := r.Run(":3000"); err != nil {
 		fmt.Printf("error starting server: %v\n", err)
 		os.Exit(1)
