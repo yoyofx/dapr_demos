@@ -4,12 +4,14 @@ ENV GO111MODULE=on \
     GOOS=linux \
     GOARCH=amd64 \
     GOPROXY=https://goproxy.cn,direct
-WORKDIR /publish
-COPY . .
+
+COPY server /server
+WORKDIR /server
+
 RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o app .
 # 最终容器, 基础镜像alpine 中包含 tini
 FROM alpine:latest as production
-COPY --from=builder /publish/app /
+COPY --from=builder /server/app /
 RUN chmod a-x app && chmod a+x app
 # Run
 CMD ["/app"]
