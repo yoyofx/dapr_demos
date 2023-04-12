@@ -8,6 +8,6 @@ spec:
   version: v1
   metadata:
     - name: redisHost
-      value: rds.kubelilin.com:6379  # Redis主机和端口号
+      value: rds.xxx.com:6379  # Redis主机和端口号
     - name: redisPassword
       value: ""  # Redis密码（可选）
